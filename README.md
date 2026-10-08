@@ -49,7 +49,8 @@ Abaixo apresentamos o motivo de criação de cada uma das novas telas e o papel 
 * **Por que escolhemos:** Traz o sentimento de personalização e identidade ao aplicativo, servindo também como ponto de ancoragem central dentro do menu inferior (`BottomBar`).
 
 > 🖼️ **[PRINT DA TELA: Perfil]**  
-> *(Insira aqui a imagem da tela de Perfil)*
+<img width="480" alt="image" src="https://github.com/user-attachments/assets/daafd006-0cb6-4def-b898-8e52e8f7a861" />
+
 
 ---
 
@@ -58,7 +59,8 @@ Abaixo apresentamos o motivo de criação de cada uma das novas telas e o papel 
 * **Por que escolhemos:** É um recurso indispensável em apps do gênero (como Netflix ou Letterboxd). A exibição em formato de *Grid* otimiza o uso da tela em dispositivos móveis.
 
 > 🖼️ **[PRINT DA TELA: Minha Lista / Grid de Filmes]**  
-> *(Insira aqui a imagem da tela de Lista Pessoal em Grid)*
+<img width="480" alt="image" src="https://github.com/user-attachments/assets/05d0c599-6f47-41f8-876f-3aa7be44e2df" />
+
 
 ---
 
@@ -73,9 +75,6 @@ Para garantir sustentabilidade e facilidade de manutenção no código, adotamos
 ### 💾 Persistência de Dados e Estado (`MainViewModel`)
 * Criamos uma instância única de **`MainViewModel`** associada ao contexto da Activity/NavHost.
 * Toda a lista de filmes, status de "Minha Lista" e comentários cadastrados residem no `ViewModel` através de `StateFlow` / `mutableStateOf`. Dessa forma, se o usuário adiciona um filme à sua lista na tela de detalhes, a alteração reflete instantaneamente na tela de "Minha Lista" sem necessidade de re-fetch manual.
-
-> 🖼️ **[PRINT / FLUXOGRAMA DE NAVEGAÇÃO OU CODIGO DO NAVHOST]**  
-> *(Insira aqui um print ou diagrama da navegação no código/app)*
 
 ---
 
@@ -92,7 +91,8 @@ A tela de **Detalhes do Filme** recebeu uma reformulação significativa para at
   A tela de detalhes é a "vitrine principal" de qualquer aplicativo de entretenimento. Adicionar interatividade em tempo real e integração com o ViewModel central provou a maturidade da nossa arquitetura de dados.
 
 > 🖼️ **[PRINT DA TELA: Detalhes do Filme (Melhorada)]**  
-> *(Insira aqui a imagem da tela de Detalhes do Filme destacando as melhorias)*
+<img width="480" alt="image" src="https://github.com/user-attachments/assets/56b0c136-4b97-4705-9881-760e44b15429" />
+
 
 ---
 
@@ -111,6 +111,4 @@ Durante esta etapa, o trio se deparou com alguns obstáculos técnicos:
 * **Desafio 3: Renderização do Grid e layout responsivo**
   * *Problema:* Ajustar o espaçamento e a proporção de aspecto dos cartazes de filmes no Grid da "Minha Lista".
   * *Solução:* Utilização de `LazyVerticalGrid` combinada com dimensões relativas e componentes de card padrão para adequação em diferentes tamanhos de tela.
-
-
 
