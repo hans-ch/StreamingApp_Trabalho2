@@ -10,8 +10,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.mystreamingf.MainViewModel
-import com.example.mystreamingf.sampleMediaList
+import com.example.mystreaming.MainViewModel
+import com.example.mystreaming.sampleMediaList
 
 @Composable
 fun AppNavigation(mainViewModel: MainViewModel = viewModel()) {
