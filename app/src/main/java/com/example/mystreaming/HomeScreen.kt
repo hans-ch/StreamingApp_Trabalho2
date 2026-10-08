@@ -19,7 +19,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 //Item filme e seus atributos
 data class MediaItem(
@@ -46,46 +52,63 @@ val sampleMediaList = listOf(
     MediaItem(4, "Filme 4", "2024", "9.1")
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavHostController,
-    onFilmeClick: (MediaItem) -> Unit = {}
+    onFilmeClick: (MediaItem) -> Unit = {},
 ) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(Color(0xFF1E2A78))
-        .verticalScroll(rememberScrollState())
-        .padding(bottom = 24.dp)){
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically){
-            Text(
-                text = "LogoApp",
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Vinhanny") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary
+                )
             )
         }
-        Spacer(modifier = Modifier.height(16.dp))
-        MediaSection(
-            title = "Recomendações",
-            items = sampleMediaList,
-            onFilmeClick = onFilmeClick
-        )
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFF1E2A78))
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = 24.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "LogoApp",
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            MediaSection(
+                title = "Recomendações",
+                items = sampleMediaList,
+                onFilmeClick = onFilmeClick
+            )
 
-        MediaSection(
-            title = "Novidades",
-            items = sampleMediaList,
-            onFilmeClick = onFilmeClick
-        )
+            MediaSection(
+                title = "Novidades",
+                items = sampleMediaList,
+                onFilmeClick = onFilmeClick
+            )
 
-        MediaSection(
-            title = "Sua lista",
-            items = sampleMediaList,
-            onFilmeClick = onFilmeClick
-        )
+            MediaSection(
+                title = "Sua lista",
+                items = sampleMediaList,
+                onFilmeClick = onFilmeClick
+            )
+        }
     }
 }
 
@@ -157,5 +180,13 @@ fun MediaCard(item: MediaItem, onClick: () -> Unit = {}) {
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TelaHomePreview(){
+    MaterialTheme{
+        HomeScreen(navController = rememberNavController())
     }
 }

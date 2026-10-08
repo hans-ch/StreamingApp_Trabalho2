@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.material3)
+    implementation("androidx.compose.material:material-icons-core:1.7.8")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.ui.tooling.preview)
