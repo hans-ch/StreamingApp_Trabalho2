@@ -46,6 +46,13 @@ fun AppNavigation() {
                 )
             }
 
+            composable(Rotas.COMENTARIOS){
+                ComentariosScreen(
+                    navController = navController,
+                    filme = sampleMediaList.first{ it.id == filmeId }
+                )
+            }
+
             composable("perfil") {
                 ProfileScreen()
             }
