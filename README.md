@@ -1,47 +1,116 @@
-﻿# Vihanny
+﻿# 📱 Documentação do Projeto Mobile - Segunda Entrega
 
-Catálogo de filmes e séries unificada estilo aplicativo de streaming
+Esta documentação tem como objetivo registrar a evolução do aplicativo, detalhando a história das decisões do trio, a arquitetura adotada, a evolução das telas e como superamos os desafios de desenvolvimento nesta segunda etapa.
 
-## Perguntas principais
+---
 
-1 - Nosso app foi feito para pessoas que gostam de filmes e desejam receber recomendações que atendam seus gostos. Também documentar filmes assistidos e o que acharam deles.
+## 1. Evolução do Projeto: Do Trabalho 1 ao Estado Atual
 
-2 - Pelo interesse que ele já tem por filmes, o usuário gostaria de receber as ultimas noticias de filmes sem precisar filtra-los por conta própria.
+### 🔄 Como estava o projeto no Trabalho 1 e o que mudou?
+No **Trabalho 1**, tínhamos um protótipo inicial composto por apenas **3 telas estáticas/isoladas**:
+1. `HomeScreen`
+2. `DetalhesFilme`
+3. `Review`
 
-3 - Para funcionar bem pro usuário fizemos telas com design intuitivo. Usando elementos que já estão gravados no repertorio da maioria da população, já que nosso publico é grande.
+A navegação era básica, os dados eram voláteis (sem sincronização real entre fluxos) e o layout ainda carecia de um padrão visual consolidado.
 
-4 - Lucro através de propaganda, pois o app é grátis. 
+Para esta **segunda entrega**, o aplicativo passou por um processo completo de refatoração e expansão:
+- **Novas Telas:** Desenvolvemos 4 novas telas (`Lista de Comentários`, `Comentário Detalhado`, `Perfil` e `Lista de Filmes Pessoais / Minha Lista`).
+- **Navegação Global e Scaffold Padronizado:** Criamos uma estrutura global utilizando `TopBar` e `BottomBar` persistentes nas telas principais, garantindo usabilidade e consistência de UI/UX.
+- **Gerenciamento de Estado:** Implementamos um `MainViewModel` compartilhado para centralizar a regra de negócio e permitir a persistência e reatividade dos dados entre todas as telas.
+- **Padronização Visual:** Harmonizamos componentes (botões, cards, cores e tipografia) para dar um aspecto visual coeso ao aplicativo.
 
-5 - estrela = avalição; caixa de comentário reconhecível; filmes na home vc automaticamente tentaria "rolar" a fileira de retângulos; etc...
+---
 
-## Etapa 1 - Idealização
+## 2. Novas Telas e Decisões de Design
 
-Nesta etapa fizemos um rascunho de como seriam algumas das tela principais do aplicativo:
-<img width="480" alt="desenho1" src="https://github.com/user-attachments/assets/7055b1ae-5910-4370-80da-957d76395f4b" />
-<img width="480" alt="desenho3" src="https://github.com/user-attachments/assets/263e0676-45cf-4584-ba17-c6fad3ac2a7b" />
-<img width="480" alt="desenho2" src="https://github.com/user-attachments/assets/86ee9463-4ece-4aa1-b4b6-33bde4915eb9" />
+Abaixo apresentamos o motivo de criação de cada uma das novas telas e o papel que desempenham na experiência do usuário.
 
-## Etapa 2 - Criação de mockups e definição do estilo visual
+### 🎬 A. Lista de Comentários
+* **O que faz:** Exibe a lista completa de avaliações e comentários deixados por outros usuários a respeito de um filme específico.
+* **Por que escolhemos:** Filmes e mídias são consumidos de forma social. Permitir que o usuário leia opiniões de terceiros adiciona um valor indispensável para a tomada de decisão sobre assistir ou não a uma obra.
 
-Tela de login
+> 🖼️ **[PRINT DA TELA: Lista de Comentários]**  
+> *(Insira aqui a imagem da tela de Lista de Comentários)*
 
-<img width="480" alt="telaLogin" src="https://github.com/user-attachments/assets/daa75a39-2271-4831-a2ae-f9ee9f6b1541" />
+---
 
-Tela de cadastro
+### 💬 B. Comentário Detalhado
+* **O que faz:** Ao clicar em um comentário específico na lista, o usuário é direcionado a esta tela para visualizar o texto na íntegra, além de informações detalhadas do autor, data e nota atribuída.
+* **Por que escolhemos:** Evita que a tela de lista de comentários fique poluída com blocos enormes de texto, oferecendo uma navegação fluida (*Master-Detail pattern*).
 
-<img width="480" alt="telaCadastro" src="https://github.com/user-attachments/assets/9d89e400-efee-44d9-8408-8ec53f14f20d" />
+> 🖼️ **[PRINT DA TELA: Comentário Detalhado]**  
+> *(Insira aqui a imagem da tela de Comentário Detalhado)*
 
-Tela home
+---
 
-<img width="480" alt="telaHome" src="https://github.com/user-attachments/assets/42eaf724-b483-476c-84df-20766f2a4eaa" />
+### 👤 C. Perfil do Usuário
+* **O que faz:** Exibe informações do usuário logado (foto de perfil, nome, bio e métricas/estatísticas simples de filmes assistidos ou avaliados).
+* **Por que escolhemos:** Traz o sentimento de personalização e identidade ao aplicativo, servindo também como ponto de ancoragem central dentro do menu inferior (`BottomBar`).
 
-Tela de descrição
+> 🖼️ **[PRINT DA TELA: Perfil]**  
+> *(Insira aqui a imagem da tela de Perfil)*
 
-<img width="480" alt="telaDescrição" src="https://github.com/user-attachments/assets/074165a1-608a-4005-bd6d-78726dbb08d6" />
+---
 
-Tela de avaliação
+### 📌 D. Lista de Filmes Pessoais ("Minha Lista")
+* **O que faz:** Apresenta um **Grid** visualmente atrativo com todos os filmes salvos pelo usuário para assistir mais tarde ou marcados como favoritos.
+* **Por que escolhemos:** É um recurso indispensável em apps do gênero (como Netflix ou Letterboxd). A exibição em formato de *Grid* otimiza o uso da tela em dispositivos móveis.
 
-<img width="480" alt="telaAvaliacao" src="https://github.com/user-attachments/assets/619270d0-1c53-4c71-9d87-2de144e942be" />
+> 🖼️ **[PRINT DA TELA: Minha Lista / Grid de Filmes]**  
+> *(Insira aqui a imagem da tela de Lista Pessoal em Grid)*
+
+---
+
+## 3. Arquitetura, Configuração e Organização do Código
+
+Para garantir sustentabilidade e facilidade de manutenção no código, adotamos a seguinte organização:
+
+### 🛣️ Estrutura do NavHost e Rotas
+* **Roteamento Centralizado:** Definimos uma classe/enum selada `Screen` com todas as rotas de navegação bem declaradas (passando argumentos como `filmeId` e `comentarioId` quando necessário).
+* **Estrutura de Scaffold:** O `NavHost` foi inserido dentro do container principal envolvido pela `TopBar` e `BottomBar`. Condicionamos a exibição dessas barras para que apareçam somente nas telas principais do aplicativo, ocultando-as em fluxos secundários/de detalhe para dar mais espaço à leitura.
+
+### 💾 Persistência de Dados e Estado (`MainViewModel`)
+* Criamos uma instância única de **`MainViewModel`** associada ao contexto da Activity/NavHost.
+* Toda a lista de filmes, status de "Minha Lista" e comentários cadastrados residem no `ViewModel` através de `StateFlow` / `mutableStateOf`. Dessa forma, se o usuário adiciona um filme à sua lista na tela de detalhes, a alteração reflete instantaneamente na tela de "Minha Lista" sem necessidade de re-fetch manual.
+
+> 🖼️ **[PRINT / FLUXOGRAMA DE NAVEGAÇÃO OU CODIGO DO NAVHOST]**  
+> *(Insira aqui um print ou diagrama da navegação no código/app)*
+
+---
+
+## 4. Complexidade Extra na Tela de Detalhes do Filme (Seção 3.2)
+
+A tela de **Detalhes do Filme** recebeu uma reformulação significativa para atender aos requisitos de complexidade extra.
+
+### 🚀 O que implementamos de complexidade extra?
+1. **Integração Dinâmica de Estado:** Ações na tela de detalhes (como favoritar/salvar na "Minha Lista" ou adicionar uma nova avaliação) reagem imediatamente ao `MainViewModel` e atualizam a interface do usuário em tempo real.
+2. **Seção de Mídia e Preview de Comentários:** Adicionamos um carrossel visual e um componente dinâmico de resumo dos últimos comentários deixados no filme, com atalho direto para a nova tela de `Lista de Comentários`.
+3. **UI Responsiva e Efeitos Visuais:** Uso de `Coil` para carregamento de imagens com estados de skeleton/loading, gradiente dinâmico de sobreposição no banner principal do filme e formatação de dados dinâmicos.
+
+* **Por que escolhemos essa solução?**  
+  A tela de detalhes é a "vitrine principal" de qualquer aplicativo de entretenimento. Adicionar interatividade em tempo real e integração com o ViewModel central provou a maturidade da nossa arquitetura de dados.
+
+> 🖼️ **[PRINT DA TELA: Detalhes do Filme (Melhorada)]**  
+> *(Insira aqui a imagem da tela de Detalhes do Filme destacando as melhorias)*
+
+---
+
+## 5. Desafios Enfrentados e Soluções Encontradas
+
+Durante esta etapa, o trio se deparou com alguns obstáculos técnicos:
+
+* **Desafio 1: Compartilhamento de estado entre telas separadas pelo NavHost**
+  * *Problema:* Inicialmente, ao criar instâncias de ViewModel dentro de cada tela individualmente, os dados de comentários e filmes salvos eram resetados ao navegar.
+  * *Solução:* Passamos a injetar/compartilhar o mesmo `MainViewModel` escopado no `NavHost` raiz do aplicativo.
+
+* **Desafio 2: Exibição condicional de TopBar e BottomBar**
+  * *Problema:* A `BottomBar` aparecia em telas de detalhe profundo (ex: `ComentarioDetalhado`), onde ela prejudicava a experiência do usuário.
+  * *Solução:* Mapeamos a rota atual via `currentBackStackEntryAsState()` no Jetpack Compose para esconder barras navegacionais em rotas específicas.
+
+* **Desafio 3: Renderização do Grid e layout responsivo**
+  * *Problema:* Ajustar o espaçamento e a proporção de aspecto dos cartazes de filmes no Grid da "Minha Lista".
+  * *Solução:* Utilização de `LazyVerticalGrid` combinada com dimensões relativas e componentes de card padrão para adequação em diferentes tamanhos de tela.
 
 
 
