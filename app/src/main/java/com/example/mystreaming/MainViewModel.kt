@@ -1,4 +1,4 @@
-package com.example.mystreamingf
+package com.example.mystreaming
 
 import androidx.lifecycle.ViewModel
 import com.example.mystreaming.MediaItem
