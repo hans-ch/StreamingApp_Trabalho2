@@ -1,4 +1,4 @@
-package com.lfcom.firstandroid
+package com.example.mystreaming
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
