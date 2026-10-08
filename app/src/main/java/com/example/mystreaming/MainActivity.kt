@@ -16,7 +16,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme {
                 Surface {
-                    HomeScreen()
+                    AppScreen()
+                    //HomeScreen()
                     //ReviewScreen()
                     //DetalhesScreen()
                 }

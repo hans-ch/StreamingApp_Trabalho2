@@ -47,7 +47,10 @@ val sampleMediaList = listOf(
 )
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(
+    navController: NavHostController,
+    onFilmeClick: (MediaItem) -> Unit = {}
+) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Color(0xFF1E2A78))
@@ -66,14 +69,32 @@ fun HomeScreen(navController: NavHostController) {
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-        MediaSection(title = "Recomendações", items = sampleMediaList)
-        MediaSection(title = "Novidades", items = sampleMediaList)
-        MediaSection(title = "Sua lista", items = sampleMediaList)
+        MediaSection(
+            title = "Recomendações",
+            items = sampleMediaList,
+            onFilmeClick = onFilmeClick
+        )
+
+        MediaSection(
+            title = "Novidades",
+            items = sampleMediaList,
+            onFilmeClick = onFilmeClick
+        )
+
+        MediaSection(
+            title = "Sua lista",
+            items = sampleMediaList,
+            onFilmeClick = onFilmeClick
+        )
     }
 }
 
 @Composable
-fun MediaSection(title: String, items: List<MediaItem>) {
+fun MediaSection(
+    title: String,
+    items: List<MediaItem>,
+    onFilmeClick: (MediaItem) -> Unit = {}
+) {
     Column(modifier = Modifier.padding(vertical = 12.dp)) {
         // Título da Seção
         Text(
@@ -90,15 +111,19 @@ fun MediaSection(title: String, items: List<MediaItem>) {
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(items) { item ->
-                MediaCard(item = item)
+                MediaCard(
+                    item = item,
+                    onClick = { onFilmeClick(item) }
+                )
             }
         }
     }
 }
 
 @Composable
-fun MediaCard(item: MediaItem) {
+fun MediaCard(item: MediaItem, onClick: () -> Unit = {}) {
     Card(
+        onClick = onClick,
         modifier = Modifier
             .width(120.dp)
             .height(180.dp),

@@ -14,7 +14,10 @@ import androidx.navigation.NavHostController
 
 
 @Composable
-fun DetalhesScreen(navController: NavHostController) {
+fun DetalhesScreen(
+    navController: NavHostController,
+    filme: MediaItem = sampleMediaList.first()
+) {
     // Organiza os elementos de cima para baixo.
     Column(
         modifier = Modifier
@@ -51,7 +54,7 @@ fun DetalhesScreen(navController: NavHostController) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Constantine",
+                    text = filme.title,
                     fontSize = 24.sp,
                     color = Color.Black
                 )
@@ -73,7 +76,7 @@ fun DetalhesScreen(navController: NavHostController) {
                     Spacer(modifier = Modifier.width(12.dp))
 
                     Text(
-                        text = "2005",
+                        text = filme.year,
                         fontSize = 12.sp,
                         color = Color.Black
                     )
@@ -81,7 +84,7 @@ fun DetalhesScreen(navController: NavHostController) {
                     Spacer(modifier = Modifier.width(12.dp))
 
                     Text(
-                        text = "3.8",
+                        text = filme.rating,
                         fontSize = 12.sp,
                         color = Color.Black
                     )
