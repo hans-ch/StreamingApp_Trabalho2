@@ -44,6 +44,15 @@ data class MediaItem(
     val rating: String
 )
 
+//Item review e seus atributos
+data class Review(
+    val id: Int,
+    val filmeId: Int,
+    val usuario: String,
+    val comentario: String,
+    val nota: Int
+)
+
 //Lista com itens de teste
 val sampleMediaList = listOf(
     MediaItem(1, "Jornada pro Oeste", "2012", "6.7"),
@@ -51,6 +60,18 @@ val sampleMediaList = listOf(
     MediaItem(3, "Filme 3", "2023", "8.0"),
     MediaItem(4, "Filme 4", "2024", "9.1")
 )
+
+val sampleReviews = listOf(
+    Review(1, 1, "Joséfa",
+        "As historias da cultura chinesa são muito loucas... Otimo filme",
+        5),
+    Review(2, 1, "Irineu",
+        "Quem era o vilão no final...? Vc não sabe, nem eu",
+        4),
+    Review(3, 2, "Aristides",
+        "Esse filme nem existe. Incrivel 10/10",
+        5))
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
