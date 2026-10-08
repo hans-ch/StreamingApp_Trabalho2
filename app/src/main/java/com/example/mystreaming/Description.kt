@@ -10,10 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
-@Preview(showBackground = true)
+
 @Composable
-fun DetalhesScreen() {
+fun DetalhesScreen(navController: NavHostController) {
     // Organiza os elementos de cima para baixo.
     Column(
         modifier = Modifier

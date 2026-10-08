@@ -73,7 +73,7 @@ fun ReviewScreen() {
         Avaliacao()
 
         Spacer(modifier = Modifier.height(16.dp))
-        Formulari()
+        Formulario()
 
 
 
@@ -154,7 +154,7 @@ fun Avaliacao() {
 
 @Preview
 @Composable
-fun Formulari(){
+fun Formulario(){
     var escrita by remember { mutableStateOf("") } //variavel para enablar escrever na "caixa"
 
     // Surface é o espaço("canvas") aonde vão os elementos abaixo

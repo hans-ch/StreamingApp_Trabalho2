@@ -1,6 +1,7 @@
 package com.example.mystreaming
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 //Item filme e seus atributos
 data class MediaItem(
@@ -44,9 +46,8 @@ val sampleMediaList = listOf(
     MediaItem(4, "Filme 4", "2024", "9.1")
 )
 
-@Preview(showBackground = true)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Color(0xFF1E2A78))
@@ -103,7 +104,10 @@ fun MediaCard(item: MediaItem) {
             .height(180.dp),
         shape = RoundedCornerShape(8.dp)
     ) {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+           // Modifier.clickable(onClick = {navController.navigate()}),
+            modifier = Modifier.fillMaxSize()
+        ) {
 
             // Tarja com informações na parte inferior
             Column(
