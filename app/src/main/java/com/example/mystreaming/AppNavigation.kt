@@ -69,7 +69,17 @@ fun AppNavigation(mainViewModel: MainViewModel = viewModel()) {
                     filme = sampleMediaList.first{ it.id == filmeId }
                 )
             }
-            
+
+            composable(Rotas.MINHA_LISTA_GRID) {
+                MinhaListaGridScreen(
+                    navController = navController,
+                    minhaLista = minhaLista,
+                    onFilmeClick = { filme ->
+                        filmeId = filme.id
+                        navController.navigate(Rotas.DESCRICAO)
+                    }
+                )
+            }
 
             composable("perfil") {
                 ProfileScreen()

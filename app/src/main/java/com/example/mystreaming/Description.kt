@@ -67,8 +67,7 @@ fun DetalhesScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Detalhes") },
-                // navigationIcon = ícone à ESQUERDA da barra (padrão: botão voltar)
-                navigationIcon = {   // ← MUDOU: seta de voltar na barra (não tem mais botão no corpo)
+                navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -93,7 +92,6 @@ fun DetalhesScreen(
             )
         }
     ) { padding ->
-        // Organiza os elementos de cima para baixo.
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -104,7 +102,6 @@ fun DetalhesScreen(
         ) {
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Coloca o bloco preto e o título lado a lado.
             Row(
                 verticalAlignment = Alignment.Bottom
             ) {
@@ -240,19 +237,16 @@ fun DetalhesScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Exibe apenas os 2 primeiros comentários como prévia
             listaComentariosExemplo.take(2).forEach { comentario ->
                 CardComentarioItem(
                     comentario = comentario,
                     onClick = {
-                        // Redireciona para a tela de comentários completos
                         navController.navigate("comentarios")
                     }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
 
-            // Link para ver mais comentários
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -273,14 +267,13 @@ fun DetalhesScreen(
     }
 }
 
-// Componente reutilizável para cada Card de Comentário
 @Composable
 fun CardComentarioItem(
     comentario: Comentario,
     onClick: () -> Unit,
     limiteCaracteres: Int = 100
 ) {
-    // Trunca o texto se for maior que o limite desejado
+
     val textoExibido = if (comentario.texto.length > limiteCaracteres) {
         "${comentario.texto.take(limiteCaracteres)}..."
     } else {

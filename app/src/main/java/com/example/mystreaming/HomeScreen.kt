@@ -77,7 +77,7 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Nhaaa") },
+                title = { Text("Home") },
                 actions = {
                     Image(
                         painter = painterResource(id = R.drawable.ic_logo_negativo),
