@@ -2,7 +2,8 @@ package com.example.mystreaming
 
 object Rotas {
     const val HOME     = "home"
-    const val SEGUNDA  = "segunda" // TelaComAbas (com BottomNav)
-    const val DETALHES = "detalhes/{titulo}"
+    const val DESCRICAO  = "descricao"
+    const val AVALIACAO = "detalhes"
+    const val MINHA_LISTA_GRID = "grid"
     const val COMENTARIOS = "comentarios"
 }

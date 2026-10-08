@@ -1,5 +1,6 @@
 package com.example.mystreaming
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +20,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -29,20 +31,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.mystreamingf.sampleMediaList
 
-//Item filme e seus atributos
-data class MediaItem(
-    val id : Int,
-    val title: String,
-    val year: String,
-    val rating: String
-)
 
 //Item review e seus atributos
 data class Review(
@@ -53,13 +50,9 @@ data class Review(
     val nota: Int
 )
 
-//Lista com itens de teste
-val sampleMediaList = listOf(
-    MediaItem(1, "Jornada pro Oeste", "2012", "6.7"),
-    MediaItem(2, "A mulher na lua", "1997", "7.7"),
-    MediaItem(3, "Filme 3", "2023", "8.0"),
-    MediaItem(4, "Filme 4", "2024", "9.1")
-)
+private val AzulFundo = Color(0xFF172B9E)
+private val AzulTopBar = Color(0xFF091152)
+private val AzulBotao = Color(0xFF5375D6)
 
 val sampleReviews = listOf(
     Review(1, 1, "Joséfa",
@@ -77,14 +70,25 @@ val sampleReviews = listOf(
 @Composable
 fun HomeScreen(
     navController: NavHostController,
+    minhaLista: List<MediaItem> = emptyList(),
     onFilmeClick: (MediaItem) -> Unit = {},
+    onVerMinhaListaClick: () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Vinhanny") },
+                title = { Text("Nhaaa") },
+                actions = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_logo_negativo),
+                        contentDescription = "Logo Vihanny",
+                        modifier = Modifier
+                            .height(90.dp)
+                            .padding(end = 16.dp)
+                    )
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
+                    containerColor = AzulTopBar,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )
@@ -111,7 +115,9 @@ fun HomeScreen(
                     color = Color.White
                 )
             }
+
             Spacer(modifier = Modifier.height(16.dp))
+
             MediaSection(
                 title = "Recomendações",
                 items = sampleMediaList,
@@ -126,8 +132,10 @@ fun HomeScreen(
 
             MediaSection(
                 title = "Sua lista",
-                items = sampleMediaList,
-                onFilmeClick = onFilmeClick
+                items = minhaLista,
+                onFilmeClick = onFilmeClick,
+                onTitleClick = onVerMinhaListaClick,
+                isClicavel = true
             )
         }
     }
@@ -137,28 +145,53 @@ fun HomeScreen(
 fun MediaSection(
     title: String,
     items: List<MediaItem>,
-    onFilmeClick: (MediaItem) -> Unit = {}
+    onFilmeClick: (MediaItem) -> Unit = {},
+    onTitleClick: () -> Unit = {},
+    isClicavel: Boolean = false
 ) {
     Column(modifier = Modifier.padding(vertical = 12.dp)) {
-        // Título da Seção
-        Text(
-            text = title,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-        )
-
-        // Lista Horizontal com os Cards
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        // Título da Seção (Clicável se isClicavel == true)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(if (isClicavel) Modifier.clickable { onTitleClick() } else Modifier)
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            items(items) { item ->
-                MediaCard(
-                    item = item,
-                    onClick = { onFilmeClick(item) }
+            Text(
+                text = title,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            if (isClicavel) {
+                Text(
+                    text = "Ver tudo >",
+                    fontSize = 12.sp,
+                    color = Color.LightGray
                 )
+            }
+        }
+
+        if (items.isEmpty() && isClicavel) {
+            Text(
+                text = "Nenhum filme adicionado à sua lista.",
+                fontSize = 12.sp,
+                color = Color.LightGray,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            )
+        } else {
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(items) { item ->
+                    MediaCard(
+                        item = item,
+                        onClick = { onFilmeClick(item) }
+                    )
+                }
             }
         }
     }
@@ -171,14 +204,10 @@ fun MediaCard(item: MediaItem, onClick: () -> Unit = {}) {
         modifier = Modifier
             .width(120.dp)
             .height(180.dp),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Black)
     ) {
-        Box(
-           // Modifier.clickable(onClick = {navController.navigate()}),
-            modifier = Modifier.fillMaxSize()
-        ) {
-
-            // Tarja com informações na parte inferior
+        Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
@@ -194,10 +223,11 @@ fun MediaCard(item: MediaItem, onClick: () -> Unit = {}) {
                     maxLines = 1
                 )
                 Row(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = item.year, color = Color.LightGray, fontSize = 9.sp)
-                    Text(text = item.rating, color = Color.White, fontSize = 9.sp)
+                    Text(text = "★ ${item.rating}", color = Color.Yellow, fontSize = 9.sp)
                 }
             }
         }

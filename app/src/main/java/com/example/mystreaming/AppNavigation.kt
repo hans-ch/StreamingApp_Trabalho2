@@ -6,18 +6,27 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mystreamingf.MainViewModel
+import com.example.mystreamingf.sampleMediaList
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(mainViewModel: MainViewModel = viewModel()) {
     val navController = rememberNavController()
 
     // Guarda o ID do filme escolhido.
     var filmeId by rememberSaveable {
         mutableStateOf(sampleMediaList.first().id)
     }
+
+    // Observa o estado reativo da "Sua lista" a partir do ViewModel
+    val minhaLista by mainViewModel.minhaLista.collectAsState()
+
+    var filmeIdSelecionado by remember { mutableStateOf(sampleMediaList.first().id) }
+    val filmeAtual = sampleMediaList.firstOrNull { it.id == filmeIdSelecionado } ?: sampleMediaList.first()
 
     Column(
         modifier = Modifier
@@ -32,17 +41,25 @@ fun AppNavigation() {
             composable(Rotas.HOME) {
                 HomeScreen(
                     navController = navController,
+                    minhaLista = minhaLista,
                     onFilmeClick = { filme ->
-                        filmeId = filme.id
-                        navController.navigate(Rotas.SEGUNDA)
+                        filmeIdSelecionado = filme.id
+                        navController.navigate(Rotas.DESCRICAO)
+                    },
+                    onVerMinhaListaClick = {
+                        navController.navigate(Rotas.MINHA_LISTA_GRID)
                     }
                 )
             }
 
-            composable(Rotas.SEGUNDA) {
+            composable(Rotas.DESCRICAO) {
                 DetalhesScreen(
                     navController = navController,
-                    filme = sampleMediaList.first { it.id == filmeId }
+                    filme = filmeAtual,
+                    isNaMinhaLista = mainViewModel.isNaMinhaLista(filmeAtual.id),
+                    onAdicionarOuRemoverMinhaLista = { filme: MediaItem ->
+                        mainViewModel.toggleMinhaLista(filme)
+                    }
                 )
             }
 
@@ -52,6 +69,7 @@ fun AppNavigation() {
                     filme = sampleMediaList.first{ it.id == filmeId }
                 )
             }
+            
 
             composable("perfil") {
                 ProfileScreen()
