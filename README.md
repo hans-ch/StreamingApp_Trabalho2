@@ -32,6 +32,8 @@ Abaixo apresentamos o motivo de criação de cada uma das novas telas e o papel 
 
 > 🖼️ **[PRINT DA TELA: Lista de Comentários]**  
 > *(Insira aqui a imagem da tela de Lista de Comentários)*
+> <img width="480" alt="Captura de tela 10-08" src="https://github.com/user-attachments/assets/42678a19-f675-4514-a074-747f609c1ad2" />
+
 
 ---
 
@@ -41,6 +43,8 @@ Abaixo apresentamos o motivo de criação de cada uma das novas telas e o papel 
 
 > 🖼️ **[PRINT DA TELA: Comentário Detalhado]**  
 > *(Insira aqui a imagem da tela de Comentário Detalhado)*
+> <img width="480" alt="Captura de tela 2026-10-08 204630" src="https://github.com/user-attachments/assets/75b4e29b-e5e0-459b-9128-f34535c9ffe6" />
+
 
 ---
 
