@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.mystreamingf.sampleMediaList
+import com.example.mystreaming.sampleMediaList
 
 
 //Data Class para os comentários
