@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.ui.text.style.TextOverflow
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -111,8 +112,16 @@ fun ComentariosScreen(
 
                     items(reviewsDoFilme) { review ->
 
-                        ReviewCard(review)
+                        ReviewCard(
+                            review = review,
+                            onClick = {
+                                navController.navigate(
+                                    "${Rotas.COMENTARIO_DETALHES}/${review.id}"
+                                )
+                            }
+                        )
                     }
+
                 }
             }
         }
@@ -120,9 +129,13 @@ fun ComentariosScreen(
 }
 
 @Composable
-fun ReviewCard(review: Review) {
+fun ReviewCard(
+    review: Review,
+    onClick: () -> Unit = {}
+) {
 
     Card(
+        onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -170,8 +183,15 @@ fun ReviewCard(review: Review) {
             Text(
                 text = review.comentario,
                 color = Color.DarkGray,
-                fontSize = 14.sp
+                fontSize = 14.sp,
+
+                // Limita o texto na lista
+                maxLines = 3,
+
+                // Coloca "..." quando ultrapassar o limite
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
 }
+
