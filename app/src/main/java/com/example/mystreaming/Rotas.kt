@@ -6,4 +6,5 @@ object Rotas {
     const val AVALIACAO = "detalhes"
     const val MINHA_LISTA_GRID = "grid"
     const val COMENTARIOS = "comentarios"
+    const val COMENTARIO_DETALHES = "comentario_detalhes"
 }
