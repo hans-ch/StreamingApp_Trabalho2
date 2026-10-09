@@ -31,8 +31,8 @@ Abaixo apresentamos o motivo de criação de cada uma das novas telas e o papel 
 * **Por que escolhemos:** Filmes e mídias são consumidos de forma social. Permitir que o usuário leia opiniões de terceiros adiciona um valor indispensável para a tomada de decisão sobre assistir ou não a uma obra.
 
 > 🖼️ **[PRINT DA TELA: Lista de Comentários]**  
-> *(Insira aqui a imagem da tela de Lista de Comentários)*
-> <img width="480" alt="Captura de tela 10-08" src="https://github.com/user-attachments/assets/42678a19-f675-4514-a074-747f609c1ad2" />
+<img width="480" alt="Captura de tela 10-08" src="https://github.com/user-attachments/assets/42678a19-f675-4514-a074-747f609c1ad2" />
+
 
 
 ---
@@ -42,8 +42,7 @@ Abaixo apresentamos o motivo de criação de cada uma das novas telas e o papel 
 * **Por que escolhemos:** Evita que a tela de lista de comentários fique poluída com blocos enormes de texto, oferecendo uma navegação fluida (*Master-Detail pattern*).
 
 > 🖼️ **[PRINT DA TELA: Comentário Detalhado]**  
-> *(Insira aqui a imagem da tela de Comentário Detalhado)*
-> <img width="480" alt="Captura de tela 2026-10-08 204630" src="https://github.com/user-attachments/assets/75b4e29b-e5e0-459b-9128-f34535c9ffe6" />
+<img width="480" alt="Captura de tela 2026-10-08 204630" src="https://github.com/user-attachments/assets/75b4e29b-e5e0-459b-9128-f34535c9ffe6" />
 
 
 ---
