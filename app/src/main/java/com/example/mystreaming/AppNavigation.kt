@@ -70,6 +70,29 @@ fun AppNavigation(mainViewModel: MainViewModel = viewModel()) {
                 )
             }
 
+            composable(
+                route = "${Rotas.COMENTARIO_DETALHES}/{reviewId}"
+            ) { backStackEntry ->
+
+                val reviewId = backStackEntry
+                    .arguments
+                    ?.getString("reviewId")
+                    ?.toIntOrNull()
+
+                val review = sampleReviews.firstOrNull {
+                    it.id == reviewId
+                }
+
+                if (review != null) {
+
+                    ComentarioDetalhesScreen(
+                        navController = navController,
+                        review = review
+                    )
+                }
+            }
+
+
             composable(Rotas.MINHA_LISTA_GRID) {
                 MinhaListaGridScreen(
                     navController = navController,
